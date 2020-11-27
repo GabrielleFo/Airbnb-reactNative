@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
 //import containers
 import HomeScreen from "./containers/HomeScreen";
 import ProfileScreen from "./containers/ProfileScreen";
@@ -11,6 +11,9 @@ import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 import RoomScreen from "./containers/RoomScreen";
+import AroundMe from "./containers/AroundMe";
+//import components
+import Logo from "./components/Logo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -106,26 +109,49 @@ export default function App() {
                     </Stack.Navigator>
                   )}
                 </Tab.Screen>
+
+                {/* Onglet AroundMe */}
                 <Tab.Screen
-                  name="Settings"
+                  name="AroundMe"
                   options={{
-                    tabBarLabel: "Settings",
-                    tabBarIcon: ({ color, size }) => (
-                      <Ionicons
-                        name={"ios-options"}
-                        size={size}
-                        color={color}
-                      />
+                    tabBarLabel: "AroundMe",
+                    tabBarIcon: () => (
+                      <FontAwesome name="map-marker" size={24} color="black" />
                     ),
                   }}
                 >
                   {() => (
                     <Stack.Navigator>
                       <Stack.Screen
-                        name="Settings"
-                        options={{ title: "Settings", tabBarLabel: "Settings" }}
+                        name="AroundMe"
+                        options={{
+                          headerTitle: () => <Logo />,
+                        }}
                       >
-                        {() => <SettingsScreen setToken={setToken} />}
+                        {() => <AroundMe />}
+                      </Stack.Screen>
+                    </Stack.Navigator>
+                  )}
+                </Tab.Screen>
+
+                <Tab.Screen
+                  name="profil"
+                  options={{
+                    tabBarLabel: "My profil",
+                    tabBarIcon: ({ color, size }) => (
+                      <SimpleLineIcons name="user" size={24} color="black" />
+                    ),
+                  }}
+                >
+                  {() => (
+                    <Stack.Navigator>
+                      <Stack.Screen
+                        name="Profil"
+                        options={{ title: "Profil", tabBarLabel: "profil" }}
+                      >
+                        {(props) => (
+                          <ProfileScreen setToken={setToken} {...props} />
+                        )}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}

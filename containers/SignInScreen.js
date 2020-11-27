@@ -32,7 +32,7 @@ export default function SignInScreen({ setToken }) {
           password: password,
         }
       );
-
+      console.log(response);
       if (response.data.token) {
         setToken(response.data.token);
       }

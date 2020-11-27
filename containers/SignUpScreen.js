@@ -102,6 +102,7 @@ export default function SignUpScreen({ setToken }) {
             <TextInput
               style={styles.textInput}
               placeholder="Password"
+              textContentType="oneTimeCode"
               secureTextEntry={true}
               value={password}
               onChangeText={(text) => {
@@ -110,6 +111,7 @@ export default function SignUpScreen({ setToken }) {
             />
             <TextInput
               style={styles.textInput}
+              textContentType="oneTimeCode" // pour iphone et le message de mdp
               placeholder="confirmation password"
               secureTextEntry={true}
               value={valPassword}
